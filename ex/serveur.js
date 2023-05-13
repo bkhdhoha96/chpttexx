@@ -8,8 +8,8 @@ const port=4000;
 const closed = () => {
     const now = new Date();
     const day = now.getDay();
-    const hour = now.getHour();
-return (day !== 1 && day !== 5 && hour < 14 && hour > 9  );
+    const hour = now.getHours();
+return (day !== 1 && day !== 5 )&&( hour < 14 && hour > 9  );
 }
 
 //midelware faction ili bch tdmlifichier mta3i sous forme static
@@ -21,9 +21,7 @@ app.use(function(req,res,next){
     else {
         res.sendFile(__dirname+'/pages/Close.html')
         console.log('This App is not available !')
-        app.get('/Close',(req,res) => {
-            res.sendFile(__dirname+'/pages/Close.html');
-        });
+        
     }
 });
 app.use( express.static('pages'));
@@ -36,9 +34,11 @@ app.get('/Contact',(req,res) => {
 app.get('/Service',(req,res) => {
     res.sendFile(__dirname+'/pages/Service.html');
 });
+app.get('/Close', (req, res) => {
+    res.sendFile(__dirname + '/pages/Close.html');
+  });
 
 
-<link rel="stylesheet" href="/style.css"></link> //css
 app.listen(port,(err)=>{
     err?console.log(err):console.log(`go to the port number ${port}`)
 })
